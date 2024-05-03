@@ -2,6 +2,8 @@ package main.java.SortingAlgorithms;
 
 import main.java.UserInterface.DrawPanel;
 
+import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BubbleSort<E extends Number & Comparable<E>> extends BaseSearch<E> {
@@ -14,11 +16,24 @@ public class BubbleSort<E extends Number & Comparable<E>> extends BaseSearch<E> 
         this.dataToSort = data;
         this.countSteps = countSteps;
         this.showComparedValues = showComparedValues;
+        this.listeners = new ArrayList<>();
     };
 
     public BubbleSort(DrawPanel drawPanel) {
         this.drawPanel = drawPanel;
+        this.listeners = new ArrayList<>();
+
     };
+
+    @Override
+    public void addListener(DrawPanel listener) {
+        super.addListener(listener);
+    }
+
+    @Override
+    public void notifyListeners() {
+        super.notifyListeners();
+    }
 
     @Override
     public void sort() {
@@ -45,13 +60,12 @@ public class BubbleSort<E extends Number & Comparable<E>> extends BaseSearch<E> 
                     System.out.println("Currently comparing '" + leftValue + "' and '" + rightValue + "'");
                 }
 
+                // value switch is required
                 if (this.leftValueBiggerThanRight(leftValue, rightValue)) {
-                    // value switch is required
-                    this.dataToSort.set(sortPosition, rightValue);
-                    this.dataToSort.set(sortPosition + 1, leftValue);
+                    this.swap(this.dataToSort, sortPosition, sortPosition + 1);
 
                     if (this.drawPanel != null) {
-                        this.drawPanel.sleepFor(1);
+                        this.notifyListeners();
                     }
                 }
             }
@@ -61,7 +75,6 @@ public class BubbleSort<E extends Number & Comparable<E>> extends BaseSearch<E> 
             }
         }
     }
-
 
     private boolean leftValueBiggerThanRight(E leftValue, E rightValue) {
         return leftValue.compareTo(rightValue) > 0;
