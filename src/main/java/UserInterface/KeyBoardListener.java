@@ -33,10 +33,11 @@ public class KeyBoardListener implements KeyListener {
         };
 
         if (keyCode == KeyEvent.VK_T) {
-            BubbleSort<Integer> bs = new BubbleSort<Integer>(this.dp);
+            BubbleSort<Integer> bs = new BubbleSort<Integer>(this.getDrawPanel());
             bs.addListener(this.getDrawPanel());
-            this.dp.startSortingWith(bs);
-            bs.removeListener(this.getDrawPanel());
+            bs.setDataToSort(this.getDrawPanel().unsortedNumbers);
+            new Thread(bs::sort).start();
+
         }
 
         if (keyCode == KeyEvent.VK_Z) {
@@ -44,19 +45,32 @@ public class KeyBoardListener implements KeyListener {
         }
 
         if (keyCode == KeyEvent.VK_U) {
-            this.dp.startSortingWith(new MergeSort<Integer>(this.dp));
+            MergeSort<Integer> ms = new MergeSort<Integer>(this.getDrawPanel());
+            ms.addListener(this.getDrawPanel());
+            ms.setDataToSort(this.getDrawPanel().unsortedNumbers);
+            new Thread(ms::sort).start();
         }
 
         if (keyCode == KeyEvent.VK_I) {
-            this.dp.startSortingWith(new SelectionSort<Integer>(this.dp));
+            SelectionSort<Integer> ss = new SelectionSort<Integer>(this.getDrawPanel());
+            ss.addListener(this.getDrawPanel());
+            ss.setDataToSort(this.getDrawPanel().unsortedNumbers);
+            new Thread(ss::sort).start();
         }
 
         if (keyCode == KeyEvent.VK_O) {
-            this.dp.startSortingWith(new RadixSort<Integer>(this.dp));
+            RadixSort<Integer> rs = new RadixSort<>(this.getDrawPanel());
+            rs.addListener(this.getDrawPanel());
+            rs.setDataToSort(this.getDrawPanel().unsortedNumbers);
+            new Thread(rs::sort).start();
         }
 
         if (keyCode == KeyEvent.VK_P) {
-            this.dp.startSortingWith(new QuickSort<Integer>(this.dp));
+            QuickSort<Integer> qs = new QuickSort<>(this.getDrawPanel());
+            qs.addListener(this.getDrawPanel());
+            qs.setDataToSort(this.getDrawPanel().unsortedNumbers);
+            new Thread(qs::sort).start();
+            // this.dp.startSortingWith(new QuickSort<Integer>(this.dp));
         }
 
 
