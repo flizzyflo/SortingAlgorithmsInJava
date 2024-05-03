@@ -2,6 +2,7 @@ package main.java.SortingAlgorithms;
 
 import main.java.UserInterface.DrawPanel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HeapSort<E extends Number & Comparable<E>> extends BaseSearch<E> {
@@ -16,6 +17,7 @@ public class HeapSort<E extends Number & Comparable<E>> extends BaseSearch<E> {
 
     public HeapSort(DrawPanel drawPanel) {
         this.drawPanel = drawPanel;
+        this.listeners = new ArrayList<>();
     }
 
     @Override
@@ -37,8 +39,16 @@ public class HeapSort<E extends Number & Comparable<E>> extends BaseSearch<E> {
 
             this.dataToSort.set(0, tempLowestElementValue);
             this.dataToSort.set(index, tempMaxElementValue);
+
+            // draw mechanics, sleep timer manages drawing speed
             if (this.drawPanel != null) {
-                this.drawPanel.repaint();
+                try {
+                    Thread.sleep(50);
+                    this.notifyListeners();
+                }
+                catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                }
             }
 
             // heapify again, since order of the array has changed and thus it needs to be reordered
