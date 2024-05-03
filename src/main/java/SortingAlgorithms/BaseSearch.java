@@ -9,6 +9,7 @@ public class BaseSearch<E extends Number & Comparable<E>> extends AbstractSort <
     protected int stepCounter = 0;
     protected List<E> dataToSort = null;
     protected DrawPanel drawPanel = null;
+    protected List<DrawPanel> listeners;
 
     @Override
     public void sort(){};
@@ -37,5 +38,19 @@ public class BaseSearch<E extends Number & Comparable<E>> extends AbstractSort <
             idx++;
         }
         return true;
+    }
+
+    public void addListener(DrawPanel listener) {
+        this.listeners.add(listener);
+    };
+
+    public void removeListener(DrawPanel listener) {
+        this.listeners.remove(listener);
+    };
+
+    public void notifyListeners() {
+        for (DrawPanel currentPanel: this.listeners) {
+            currentPanel.receiveNotification();
+        }
     }
 }
