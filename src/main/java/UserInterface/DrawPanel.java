@@ -2,6 +2,8 @@ package main.java.UserInterface;
 import main.java.RandomNumberGenerator.NumberGenerator;
 import main.java.SortingAlgorithms.BaseSearch;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,11 +51,17 @@ public class DrawPanel extends JPanel {
     }
 
     public void sleepFor(long millisecondsToSleep) {
-        long timeElapsed;
-        final long startTime = System.nanoTime();
-        do {
-            timeElapsed = System.nanoTime() - startTime;
-        } while (timeElapsed < millisecondsToSleep);
+
+        DrawPanel thisPanel = this;
+        ActionListener al = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                thisPanel.repaint();
+            }
+        };
+
+        Timer t = new Timer((int)millisecondsToSleep, al);
+        t.start();
     }
 
     public void startSortingWith(BaseSearch<Integer> choosenAlgorithm) {

@@ -51,9 +51,7 @@ public class BubbleSort<E extends Number & Comparable<E>> extends BaseSearch<E> 
                     this.dataToSort.set(sortPosition + 1, leftValue);
 
                     if (this.drawPanel != null) {
-                        System.out.println("here");
-                        this.drawPanel.repaint();
-                        this.drawPanel.sleepFor(100);
+                        this.drawPanel.sleepFor(1);
                     }
                 }
             }
