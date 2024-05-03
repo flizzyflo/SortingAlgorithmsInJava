@@ -14,7 +14,6 @@ public class SelectionSort<E extends Number & Comparable<E>> extends BaseSearch<
         this.dataToSort = data;
         this.countSteps = countSteps;
         this.showComparedValues = showComparedValues;
-        this.listeners = new ArrayList<>();
     }
 
     public SelectionSort(DrawPanel drawPanel) {
