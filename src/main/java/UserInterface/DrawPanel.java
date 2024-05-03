@@ -11,10 +11,12 @@ import java.awt.*;
 
 public class DrawPanel extends JPanel{
 
+
+
     private List<Integer> unsortedNumbers = null;
-    private final int BLOCK_WIDTH = 5;
-    private final int BLOCK_OFFSET = 5;
-    private final int BAR_COUNT = 75;
+    private final int BLOCK_WIDTH = 2;
+    private final int BLOCK_OFFSET = 2;
+    private final int BAR_COUNT = 200;
     private final List<Color> colorsForUnsortedBars = new ArrayList<Color>(Arrays.asList(Color.LIGHT_GRAY, Color.GRAY, Color.DARK_GRAY));
 
     private int parentFrameWidth;
@@ -48,12 +50,8 @@ public class DrawPanel extends JPanel{
         }
     }
 
-    public void sleepFor(long millisecondsToSleep) {
-
-    }
-
     public void startSortingWith(BaseSearch<Integer> chosenAlgorithm) {
-        chosenAlgorithm.setDataToSort(this.unsortedNumbers);
+        chosenAlgorithm.setDataToSort(this.getUnsortedNumbers());
         chosenAlgorithm.sort();
     }
 
@@ -94,6 +92,10 @@ public class DrawPanel extends JPanel{
 
     public void receiveNotification() {
         this.repaint();
+
     }
 
+    public List<Integer> getUnsortedNumbers() {
+        return this.unsortedNumbers;
+    }
 }
