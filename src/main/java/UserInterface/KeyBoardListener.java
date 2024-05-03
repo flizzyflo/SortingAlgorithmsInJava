@@ -19,6 +19,10 @@ public class KeyBoardListener implements KeyListener {
 
     }
 
+    public DrawPanel getDrawPanel() {
+        return this.dp;
+    }
+
     @Override
     public void keyPressed(KeyEvent e) {
 
@@ -29,7 +33,10 @@ public class KeyBoardListener implements KeyListener {
         };
 
         if (keyCode == KeyEvent.VK_T) {
-            this.dp.startSortingWith(new BubbleSort<Integer>(this.dp));
+            BubbleSort<Integer> bs = new BubbleSort<Integer>(this.dp);
+            bs.addListener(this.getDrawPanel());
+            this.dp.startSortingWith(bs);
+            bs.removeListener(this.getDrawPanel());
         }
 
         if (keyCode == KeyEvent.VK_Z) {
