@@ -2,8 +2,6 @@ package main.java.UserInterface;
 import main.java.RandomNumberGenerator.NumberGenerator;
 import main.java.SortingAlgorithms.BaseSearch;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +9,7 @@ import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 
-public class DrawPanel extends JPanel {
+public class DrawPanel extends JPanel{
 
     private List<Integer> unsortedNumbers = null;
     private final int BLOCK_WIDTH = 5;
@@ -52,21 +50,11 @@ public class DrawPanel extends JPanel {
 
     public void sleepFor(long millisecondsToSleep) {
 
-        DrawPanel thisPanel = this;
-        ActionListener al = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                thisPanel.repaint();
-            }
-        };
-
-        Timer t = new Timer((int)millisecondsToSleep, al);
-        t.start();
     }
 
-    public void startSortingWith(BaseSearch<Integer> choosenAlgorithm) {
-        choosenAlgorithm.setDataToSort(this.unsortedNumbers);
-        choosenAlgorithm.sort();
+    public void startSortingWith(BaseSearch<Integer> chosenAlgorithm) {
+        chosenAlgorithm.setDataToSort(this.unsortedNumbers);
+        chosenAlgorithm.sort();
     }
 
     @Override
@@ -103,4 +91,9 @@ public class DrawPanel extends JPanel {
     public int getBarCount() {
         return BAR_COUNT;
     }
+
+    public void receiveNotification() {
+        this.repaint();
+    }
+
 }
