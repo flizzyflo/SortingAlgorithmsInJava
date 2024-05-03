@@ -10,7 +10,6 @@ public class QuickSort<E extends Number & Comparable<E>> extends BaseSearch<E> {
 
     public QuickSort (List<E> dataToSort) {
         this.dataToSort = dataToSort;
-        this.listeners = new ArrayList<>();
     }
 
     public QuickSort (DrawPanel drawPanel) {
