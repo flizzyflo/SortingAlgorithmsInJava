@@ -22,7 +22,6 @@ public class BubbleSort<E extends Number & Comparable<E>> extends BaseSearch<E> 
     public BubbleSort(DrawPanel drawPanel) {
         this.drawPanel = drawPanel;
         this.listeners = new ArrayList<>();
-
     };
 
     @Override
@@ -65,7 +64,13 @@ public class BubbleSort<E extends Number & Comparable<E>> extends BaseSearch<E> 
                     this.swap(this.dataToSort, sortPosition, sortPosition + 1);
 
                     if (this.drawPanel != null) {
-                        this.notifyListeners();
+                        try {
+                            Thread.sleep(10);
+                            this.notifyListeners();
+                        }
+                        catch (InterruptedException e) {
+                            System.out.println(e.getMessage());
+                        }
                     }
                 }
             }

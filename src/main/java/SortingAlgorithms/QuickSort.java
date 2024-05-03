@@ -10,14 +10,27 @@ public class QuickSort<E extends Number & Comparable<E>> extends BaseSearch<E> {
 
     public QuickSort (List<E> dataToSort) {
         this.dataToSort = dataToSort;
+        this.listeners = new ArrayList<>();
     }
 
     public QuickSort (DrawPanel drawPanel) {
         this.drawPanel = drawPanel;
+        this.listeners = new ArrayList<>();
     }
 
     @Override
     public void sort() {
+
+        // draw mechanics, sleep timer manages drawing speed
+        if (this.drawPanel != null) {
+            try {
+                Thread.sleep(50);
+                this.notifyListeners();
+            } catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
         int left = 0;
         int right = this.dataToSort.size() - 1;
         this.quickSort(left, right);
@@ -48,8 +61,15 @@ public class QuickSort<E extends Number & Comparable<E>> extends BaseSearch<E> {
             this.swap(this.dataToSort, leftPointer, rightPointer);
         }
 
+        // draw mechanics, sleep timer manages drawing speed
         if (this.drawPanel != null) {
-            this.drawPanel.repaint();
+            try {
+                Thread.sleep(50);
+                this.notifyListeners();
+            }
+            catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+            }
         }
 
         // last step, swap the left pointer element with pivot element

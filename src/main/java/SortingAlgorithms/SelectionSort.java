@@ -2,6 +2,7 @@ package main.java.SortingAlgorithms;
 
 import main.java.UserInterface.DrawPanel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SelectionSort<E extends Number & Comparable<E>> extends BaseSearch<E> {
@@ -13,10 +14,12 @@ public class SelectionSort<E extends Number & Comparable<E>> extends BaseSearch<
         this.dataToSort = data;
         this.countSteps = countSteps;
         this.showComparedValues = showComparedValues;
+        this.listeners = new ArrayList<>();
     }
 
     public SelectionSort(DrawPanel drawPanel) {
         this.drawPanel = drawPanel;
+        this.listeners = new ArrayList<>();
     }
 
     @Override
@@ -44,22 +47,29 @@ public class SelectionSort<E extends Number & Comparable<E>> extends BaseSearch<
                     currLowestValueIndex = lowestValueIndex;
                 }
 
-                if (this.drawPanel != null) {
-                    this.drawPanel.repaint();
+            }
+
+            // draw mechanics, sleep timer manages drawing speed
+            if (this.drawPanel != null) {
+                try {
+                    Thread.sleep(50);
+                    this.notifyListeners();
+                }
+                catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
                 }
             }
 
+            if (currLowestValueIndex == indexToBeReplaced) {
+                continue;
+            }
 
-        if (currLowestValueIndex == indexToBeReplaced) {
-            continue;
-        }
+            // swap values; min value of the current iteration and most left value.
+            E currentLowestValue = this.dataToSort.get(currLowestValueIndex);
+            E valueToBeReplaced = this.dataToSort.get(indexToBeReplaced);
 
-        // swap values; min value of the current iteration and most left value.
-        E currentLowestValue = this.dataToSort.get(currLowestValueIndex);
-        E valueToBeReplaced = this.dataToSort.get(indexToBeReplaced);
-
-        this.dataToSort.set(indexToBeReplaced, currentLowestValue);
-        this.dataToSort.set(currLowestValueIndex, valueToBeReplaced);
+            this.dataToSort.set(indexToBeReplaced, currentLowestValue);
+            this.dataToSort.set(currLowestValueIndex, valueToBeReplaced);
 
         }
     }

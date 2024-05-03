@@ -17,6 +17,7 @@ public class RadixSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
         this.drawPanel = drawPanel;
         this.baseFactor = 10;
         this.bucket = new HashMap<Integer, List<E>>();
+        this.listeners = new ArrayList<>();
     }
 
     public RadixSort (List<E> dataToSort) {
@@ -25,7 +26,7 @@ public class RadixSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
         this.maxNumberDigitCount = maxNumber.toString().length();
         this.baseFactor = 10;
         this.bucket = new HashMap<Integer, List<E>>();
-
+        this.listeners = new ArrayList<>();
     }
 
     public RadixSort (List<E> dataToSort, int baseFactor) {
@@ -34,6 +35,7 @@ public class RadixSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
         this.maxNumberDigitCount = maxNumber.toString().length();
         this.baseFactor = baseFactor;
         this.bucket = new HashMap<Integer, List<E>>();
+        this.listeners = new ArrayList<>();
     }
 
     /**
@@ -58,6 +60,7 @@ public class RadixSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
             for (E value: this.dataToSort) {
                 bucketNumber = this.identifyBucketNumberFor(value, factor);
                 this.insertIntoBucket(bucketNumber, value);
+
             }
             // place of number to use for bucketizing, e.g. numberPositionToGrab = 1 means for 1537 bucket 7,
             // numberPositionToGrab = 2 would be 3 and so on
@@ -69,7 +72,17 @@ public class RadixSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
 
             // clear buckets for next iteration
             this.clearBuckets();
+
+            if (this.drawPanel != null) {
+                try {
+                    Thread.sleep(300);
+                    this.notifyListeners();
+                } catch (InterruptedException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
         }
+
     }
 
 
