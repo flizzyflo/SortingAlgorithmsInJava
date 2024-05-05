@@ -1,29 +1,51 @@
 package main.java.SortingAlgorithms;
 
-import main.java.RandomNumberGenerator.NumberGenerator;
 import main.java.UserInterface.DrawPanel;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * This class implements the Merge Sort algorithm to sort a list of elements.
+ * It extends the BaseSearch class to inherit common sorting functionality.
+ *
+ * @param <E> The type of elements to be sorted, which must extend Number and implement Comparable.
+ */
 public class MergeSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
 
-
+    /**
+     * Constructor to initialize MergeSort with data to be sorted.
+     *
+     * @param dataToSort The data to be sorted.
+     */
     public MergeSort(List<E> dataToSort) {
         this.dataToSort = dataToSort;
     }
 
+    /**
+     * Constructor to initialize MergeSort with a DrawPanel for visualization.
+     *
+     * @param drawPanel The DrawPanel for visualization.
+     */
     public MergeSort(DrawPanel drawPanel) {
         this.drawPanel = drawPanel;
+        this.listeners = new ArrayList<>();
     }
 
     public void sort() {
-        sort(this.dataToSort);
+        this.sort(this.dataToSort);
     }
 
-    private void sort( List<E> unsortedData ) {
+    /**
+     * Recursively sorts the input list using the Merge Sort algorithm.
+     *
+     * @param unsortedData The list to be sorted.
+     */
+    private void sort(List<E> unsortedData) {
         int listLength = unsortedData.size();
-        if (listLength < 2 ) {
+
+        if (listLength < 2) {
             return;
         }
 
@@ -36,13 +58,20 @@ public class MergeSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
         merge(unsortedData, leftHalf, rightHalf);
     }
 
+    /**
+     * Merges two sorted lists into one sorted list.
+     *
+     * @param unsortedData The list to store the merged result.
+     * @param leftHalf The left half of the list to be merged.
+     * @param rightHalf The right half of the list to be merged.
+     */
     private void merge(List<E> unsortedData, List<E> leftHalf, List<E> rightHalf) {
 
         int leftHalfIndex = 0;
         int rightHalfIndex = 0;
         int mergedArray = 0;
 
-        while(leftHalfIndex < leftHalf.size()  && rightHalfIndex < rightHalf.size() ) {
+        while(leftHalfIndex < leftHalf.size() && rightHalfIndex < rightHalf.size() ) {
 
             if (leftHalf.get(leftHalfIndex).compareTo(rightHalf.get(rightHalfIndex)) <= 0) {
                 E leftVal = leftHalf.get(leftHalfIndex);
@@ -57,10 +86,8 @@ public class MergeSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
             };
             mergedArray++;
 
-            if (this.drawPanel != null) {
-                this.drawPanel.repaint();
-                this.drawPanel.sleepFor(1000);
-            }
+            // draw mechanics, sleep timer manages drawing speed
+            this.drawSortProcess();
         }
 
         while(leftHalfIndex < leftHalf.size() ) {
@@ -68,6 +95,7 @@ public class MergeSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
             unsortedData.set(mergedArray, leftVal);
             leftHalfIndex++;
             mergedArray++;
+            this.drawSortProcess();
         }
 
         while (rightHalfIndex < rightHalf.size() )  {
@@ -75,7 +103,23 @@ public class MergeSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
             unsortedData.set(mergedArray, rightVal);
             rightHalfIndex++;
             mergedArray++;
+            this.drawSortProcess();
         }
+    }
 
-    };
+    /**
+     * Utility method to manage the drawing process during sorting.
+     * It introduces a delay to control the drawing speed.
+     */
+    private void drawSortProcess() {
+        if (this.drawPanel != null) {
+            try {
+                Thread.sleep(2);
+                this.notifyListeners();
+            }
+            catch (InterruptedException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 }
