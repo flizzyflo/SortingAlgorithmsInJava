@@ -1,6 +1,6 @@
 package main.java.UserInterface;
 import main.java.RandomNumberGenerator.NumberGenerator;
-import main.java.SortingAlgorithms.BaseSearch;
+
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,15 +9,13 @@ import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 
-public class DrawPanel extends JPanel{
-
-
+public class DrawPanel extends JPanel {
 
     private List<Integer> unsortedNumbers = null;
-    private final int BLOCK_WIDTH = 2;
     private final int BLOCK_OFFSET = 2;
-    private final int BAR_COUNT = 200;
-    private final List<Color> colorsForUnsortedBars = new ArrayList<Color>(Arrays.asList(Color.LIGHT_GRAY, Color.GRAY, Color.DARK_GRAY));
+    private final int BAR_COUNT = 250;
+    private final int BLOCK_WIDTH = 3;
+    private final List<Color> colorsForUnsortedBars = new ArrayList<>(Arrays.asList(Color.LIGHT_GRAY, Color.GRAY, Color.DARK_GRAY));
 
     private int parentFrameWidth;
     private int parentFrameHeight;
@@ -50,11 +48,6 @@ public class DrawPanel extends JPanel{
         }
     }
 
-    public void startSortingWith(BaseSearch<Integer> chosenAlgorithm) {
-        chosenAlgorithm.setDataToSort(this.getUnsortedNumbers());
-        chosenAlgorithm.sort();
-    }
-
     @Override
     public void repaint() {
         super.repaint();
@@ -72,14 +65,13 @@ public class DrawPanel extends JPanel{
 
     public int calculateFrameMidX() {
         int halfScreenWidth = this.parentFrameWidth / 2;
-        return halfScreenWidth - (halfScreenWidth / 2);
+        return (halfScreenWidth / 8);
     }
 
     public int calculateFrameMidY() {
         int halfScreenHeight = this.parentFrameHeight / 2;
         return halfScreenHeight - (halfScreenHeight / 2);
     }
-
 
     public void setFrameSize(Dimension screenSize) {
         this.parentFrameWidth = screenSize.width;
