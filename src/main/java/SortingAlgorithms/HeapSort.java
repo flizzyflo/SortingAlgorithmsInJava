@@ -5,16 +5,33 @@ import main.java.UserInterface.DrawPanel;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * This class implements the Heap Sort algorithm to sort a list of elements.
+ * It extends the BaseSearch class to inherit common sorting functionality.
+ *
+ * @param <E> The type of elements to be sorted, which must extend Number and implement Comparable.
+ */
 public class HeapSort<E extends Number & Comparable<E>> extends BaseSearch<E> {
 
     private boolean countSteps;
     private boolean showComparedValues;
     private DrawPanel drawPanel;
 
+    /**
+     * Constructor to initialize HeapSort with data to be sorted.
+     *
+     * @param dataToSort The data to be sorted.
+     */
     public HeapSort(List<E> dataToSort) {
         this.dataToSort = dataToSort;
     }
 
+    /**
+     * Constructor to initialize HeapSort with a DrawPanel for visualization.
+     *
+     * @param drawPanel The DrawPanel for visualization.
+     */
     public HeapSort(DrawPanel drawPanel) {
         this.drawPanel = drawPanel;
         this.listeners = new ArrayList<>();
@@ -57,6 +74,12 @@ public class HeapSort<E extends Number & Comparable<E>> extends BaseSearch<E> {
         }
     }
 
+    /**
+     * Adjusts the heap to maintain the heap property.
+     *
+     * @param parentIndex The index of the parent node.
+     * @param numberOfElements The number of elements in the heap.
+     */
     private void heapify(int parentIndex, int numberOfElements) {
 
         int maxNumberIndex = parentIndex;
