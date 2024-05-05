@@ -60,7 +60,7 @@ public class HeapSort<E extends Number & Comparable<E>> extends BaseSearch<E> {
             // draw mechanics, sleep timer manages drawing speed
             if (this.drawPanel != null) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(SortSpeed.HEAP_SORT);
                     this.notifyListeners();
                 }
                 catch (InterruptedException e) {

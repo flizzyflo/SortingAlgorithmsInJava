@@ -86,7 +86,7 @@ public class BubbleSort<E extends Number & Comparable<E>> extends BaseSearch<E> 
 
                     if (this.drawPanel != null) {
                         try {
-                            Thread.sleep(10);
+                            Thread.sleep(SortSpeed.BUBBLE_SORT);
                             this.notifyListeners();
                         }
                         catch (InterruptedException e) {

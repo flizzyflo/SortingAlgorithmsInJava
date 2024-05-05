@@ -97,7 +97,7 @@ public class RadixSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
 
             if (this.drawPanel != null) {
                 try {
-                    Thread.sleep(300);
+                    Thread.sleep(SortSpeed.RADIX_SORT);
                     this.notifyListeners();
                 } catch (InterruptedException e) {
                     System.out.println(e.getMessage());

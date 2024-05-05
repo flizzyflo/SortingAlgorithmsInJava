@@ -69,7 +69,7 @@ public class SelectionSort<E extends Number & Comparable<E>> extends BaseSearch<
             // draw mechanics, sleep timer manages drawing speed
             if (this.drawPanel != null) {
                 try {
-                    Thread.sleep(50);
+                    Thread.sleep(SortSpeed.SELECTION_SORT);
                     this.notifyListeners();
                 }
                 catch (InterruptedException e) {

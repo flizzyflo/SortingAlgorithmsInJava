@@ -38,7 +38,7 @@ public class QuickSort<E extends Number & Comparable<E>> extends BaseSearch<E> {
         // draw mechanics, sleep timer manages drawing speed
         if (this.drawPanel != null) {
             try {
-                Thread.sleep(50);
+                Thread.sleep(SortSpeed.QUICK_SORT);
                 this.notifyListeners();
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());
@@ -84,7 +84,7 @@ public class QuickSort<E extends Number & Comparable<E>> extends BaseSearch<E> {
         // draw mechanics, sleep timer manages drawing speed
         if (this.drawPanel != null) {
             try {
-                Thread.sleep(50);
+                Thread.sleep(SortSpeed.QUICK_SORT);
                 this.notifyListeners();
             }
             catch (InterruptedException e) {

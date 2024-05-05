@@ -114,7 +114,7 @@ public class MergeSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
     private void drawSortProcess() {
         if (this.drawPanel != null) {
             try {
-                Thread.sleep(2);
+                Thread.sleep(SortSpeed.MERGE_SORT);
                 this.notifyListeners();
             }
             catch (InterruptedException e) {
