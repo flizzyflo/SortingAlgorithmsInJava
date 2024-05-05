@@ -6,12 +6,12 @@ import java.awt.*;
 
 public class MainFrame extends JFrame {
     private final int SCREENHEIGTH = 900;
-    private final int SCREENWIDTH = 1500;
+    private final int SCREENWIDTH = 1400;
 
 
     public MainFrame () {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(SCREENWIDTH, SCREENHEIGTH);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setSize(SCREENWIDTH, SCREENHEIGTH);
 
         DrawPanel drawPanel = new DrawPanel();
         drawPanel.setFrameSize(new Dimension(SCREENHEIGTH, SCREENWIDTH));
@@ -22,10 +22,10 @@ public class MainFrame extends JFrame {
         drawPanel.generateListElements();
         drawPanel.setFrameSize(this.getSize());
 
-        addKeyListener(keyBoardListener);
-        add(drawPanel);
+        this.addKeyListener(keyBoardListener);
+        this.add(drawPanel);
 
-        setVisible(true);
-        setTitle("Sorting-Algorithm-Visualizer");
+        this.setVisible(true);
+        this.setTitle("Sorting-Algorithm-Visualizer");
     }
 }
