@@ -6,6 +6,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class implements the Radix Sort algorithm to sort a list of elements.
+ * It extends the BaseSearch class to inherit common sorting functionality.
+ *
+ * @param <E> The type of elements to be sorted, which must extend Number and implement Comparable.
+ */
 public class RadixSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
 
     private final int baseFactor;
@@ -13,6 +19,11 @@ public class RadixSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
     private E maxNumber;
     private int maxNumberDigitCount;
 
+    /**
+     * Constructor to initialize RadixSort with a DrawPanel for visualization.
+     *
+     * @param drawPanel The DrawPanel for visualization.
+     */
     public RadixSort (DrawPanel drawPanel) {
         this.drawPanel = drawPanel;
         this.baseFactor = 10;
@@ -20,6 +31,11 @@ public class RadixSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
         this.listeners = new ArrayList<>();
     }
 
+    /**
+     * Constructor to initialize RadixSort with data to be sorted.
+     *
+     * @param dataToSort The data to be sorted.
+     */
     public RadixSort (List<E> dataToSort) {
         this.dataToSort = dataToSort;
         this.maxNumber = this.getMaximumNumberOfData();
@@ -29,6 +45,12 @@ public class RadixSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
         this.listeners = new ArrayList<>();
     }
 
+    /**
+     * Constructor to initialize RadixSort with data to be sorted and a custom base factor.
+     *
+     * @param dataToSort The data to be sorted.
+     * @param baseFactor The base factor for radix sort.
+     */
     public RadixSort (List<E> dataToSort, int baseFactor) {
         this.dataToSort = dataToSort;
         this.maxNumber = this.getMaximumNumberOfData();
@@ -85,7 +107,11 @@ public class RadixSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
 
     }
 
-
+    /**
+     * Finds the maximum number in the dataset.
+     *
+     * @return The maximum number in the dataset.
+     */
     private E getMaximumNumberOfData() {
         E curMax = null;
         for (E value: this.dataToSort) {
@@ -102,7 +128,7 @@ public class RadixSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
     }
 
     /**
-     * This method sets up the required buckets according to the possible numbers.
+     * Initializes the buckets required for radix sort.
      */
     private void initializeBucket() {
         for (int bucketNumber = 0; bucketNumber < this.baseFactor; bucketNumber++) {
@@ -111,10 +137,11 @@ public class RadixSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
     }
 
     /**
-     * This method identifies the relevant bucketnumber for a specific value.
-     * @param value The value which the relevant bucket should be identified for
-     * @param factor The factor by which the value is divided to identify the relvant bucket number.
-     * @Returns The bucketnumber of the specific number for this specific iteration
+     * Identifies the relevant bucket number for a specific value.
+     *
+     * @param value The value for which the bucket number should be identified.
+     * @param factor The factor used to identify the bucket number.
+     * @return The bucket number for the specified value.
      */
     private int identifyBucketNumberFor(E value, int factor) {
         int bucketNumber;
@@ -123,9 +150,10 @@ public class RadixSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
     };
 
     /**
-     * This method inserts the value into the specific bucket.
-     * @param value The value which the relevant bucket should be identified for
-     * @param bucketNumber Relevant bucketnumber to put the value in to
+     * Inserts the value into the specified bucket.
+     *
+     * @param bucketNumber The bucket number where the value should be inserted.
+     * @param value The value to be inserted.
      */
     private void insertIntoBucket (int bucketNumber, E value) {
         List<E> bucketList = this.bucket.get(bucketNumber);
@@ -133,7 +161,7 @@ public class RadixSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
     };
 
     /**
-     * Updates the base data after every single sorting iteration to represent the newest sort result
+     * Updates the base data after each sorting iteration.
      */
     private void updateDataToBeSorted() {
         this.dataToSort.clear();
