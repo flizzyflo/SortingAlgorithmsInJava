@@ -50,6 +50,9 @@ public class KeyBoardListener implements KeyListener {
             MergeSort<Integer> ms = new MergeSort<Integer>(this.getDrawPanel());
             ms.addListener(this.getDrawPanel());
             ms.setDataToSort(this.getDrawPanel().getUnsortedNumbers());
+
+            // TODO thread starts public sort, thus drawing happens due to recursion just then
+            // TODO need to adjust
             new Thread(ms::sort).start();
         }
 
