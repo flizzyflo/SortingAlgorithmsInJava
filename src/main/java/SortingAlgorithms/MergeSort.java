@@ -42,7 +42,7 @@ public class MergeSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
      *
      * @param unsortedData The list to be sorted.
      */
-    private void sort(List<E> unsortedData) {
+    public void sort(List<E> unsortedData) {
         int listLength = unsortedData.size();
 
         if (listLength < 2) {
@@ -53,9 +53,9 @@ public class MergeSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
         List<E> rightHalf = new ArrayList<>(unsortedData.subList(middleIndex, listLength));
         List<E> leftHalf = new ArrayList<>(unsortedData.subList(0, middleIndex));
 
-        sort(leftHalf);
-        sort(rightHalf);
-        merge(unsortedData, leftHalf, rightHalf);
+        this.sort(leftHalf);
+        this.sort(rightHalf);
+        this.merge(unsortedData, leftHalf, rightHalf);
     }
 
     /**
@@ -77,17 +77,17 @@ public class MergeSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
                 E leftVal = leftHalf.get(leftHalfIndex);
                 unsortedData.set(mergedArray, leftVal);
                 leftHalfIndex++;
+                this.drawSortProcess();
             }
 
             else if (rightHalf.get(rightHalfIndex).compareTo(leftHalf.get(leftHalfIndex)) < 0) {
                 E rightVal = rightHalf.get(rightHalfIndex);
                 unsortedData.set(mergedArray, rightVal);
                 rightHalfIndex++;
+                this.drawSortProcess();
             };
-            mergedArray++;
 
-            // draw mechanics, sleep timer manages drawing speed
-            this.drawSortProcess();
+            mergedArray++;
         }
 
         while(leftHalfIndex < leftHalf.size() ) {
@@ -95,7 +95,7 @@ public class MergeSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
             unsortedData.set(mergedArray, leftVal);
             leftHalfIndex++;
             mergedArray++;
-            this.drawSortProcess();
+
         }
 
         while (rightHalfIndex < rightHalf.size() )  {
@@ -103,7 +103,6 @@ public class MergeSort<E extends Number & Comparable<E>> extends BaseSearch<E>{
             unsortedData.set(mergedArray, rightVal);
             rightHalfIndex++;
             mergedArray++;
-            this.drawSortProcess();
         }
     }
 
